@@ -222,25 +222,11 @@ class BadgeOS_Reset {
 	 * @since 1.0.0
 	 */
 	private function reset_p2p() {
+		return;
+
+		//@todo Determine how to best delete only BadgeOS content from these tables.
 		global $wpdb;
 
-		$sqlp2p = "TRUNCATE TABLE {$wpdb->p2p}";
-
-		$wpdb->query(
-			$wpdb->prepare(
-				$sqlp2p,
-				''
-			)
-		);
-
-		$sqlp2pmeta = "TRUNCATE TABLE {$wpdb->p2pmeta}";
-
-		$wpdb->query(
-			$wpdb->prepare(
-				$sqlp2pmeta,
-				''
-			)
-		);
 	}
 
 	/**
