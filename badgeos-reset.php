@@ -212,60 +212,19 @@ class BadgeOS_Reset {
 	}
 
 	/**
-	 * Query for our post type posts and associated attachments.
+	 * Process our achievements and attachment IDs for deletion.
 	 *
 	 * Uses WordPress core API functions for complete deletion of asscoiated data instead of simply deleting database rows.
 	 *
 	 * @since 1.0.0
 	 */
-	private function reset_achievement_types() {
-		global $wpdb;
+	public function reset_achievements_and_attachments() {
 
-		$achievement_types = badgeos_get_achievement_types_slugs();
-		$achievement_types[] = 'achievement-type';
-		$achievement_types[] = 'badgeos-log-entry';
-
-		//Post Types
-		$sql = "SELECT ID AS ID FROM {$wpdb->posts} WHERE post_type = %s";
-		$achievement_ids = array();
-		foreach( $achievement_types as $type ) {
-			$result_ids = $wpdb->get_results(
-				$wpdb->prepare(
-					$sql,
-					$type
-				)
-			);
-
-			if ( !empty( $result_ids ) ) {
-				foreach( $result_ids as $value ) {
-					$achievement_ids[] = absint( $value->ID );
-				}
-			}
-		}
-
-		//Attachments/media
-		$sql = "SELECT ID AS ID FROM {$wpdb->posts} WHERE post_type = %s AND post_parent = %d";
-		$attachment_ids = array();
-		foreach( $achievement_ids as $id ) {
-			$attachments_results_ids = $wpdb->get_results(
-				$wpdb->prepare(
-					$sql,
-					'attachment',
-					$id
-				)
-			);
-			if ( !empty( $attachments_results_ids ) ) {
-				foreach( $attachments_results_ids as $value ) {
-					$attachment_ids[] = absint( $value->ID );
-				}
-			}
-		}
-
-		foreach( $achievement_ids as $achievement ) {
+		foreach( $this->achievement_ids as $achievement ) {
 			wp_delete_post( $achievement );
 		}
 
-		foreach( $attachment_ids as $attachment ) {
+		foreach( $this->attachment_ids as $attachment ) {
 			wp_delete_attachment( $attachment );
 		}
 	}
