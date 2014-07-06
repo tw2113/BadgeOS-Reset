@@ -86,6 +86,91 @@ class BadgeOS_Reset {
 	}
 
 	/**
+	 * Set our achievement types property for all registered achievement types and core types
+	 *
+	 * @since 1.0.0
+	 */
+	public function set_achievements() {
+		$achievement_types = badgeos_get_achievement_types_slugs();
+		$achievement_types[] = 'achievement-type';
+		$achievement_types[] = 'badgeos-log-entry';
+
+		$this->achievement_types = $achievement_types;
+	}
+
+	/**
+	 * Query for our achievement post IDs based on registered achievement types.
+	 *
+	 * @since 1.0.0
+	 */
+	public function set_achievement_type_ids() {
+		global $wpdb;
+
+		$sql = "SELECT ID AS ID FROM {$wpdb->posts} WHERE post_type = %s";
+		$achievement_ids = array();
+		foreach( $this->achievement_types as $type ) {
+			$result_ids = $wpdb->get_results(
+				$wpdb->prepare(
+					$sql,
+					$type
+				)
+			);
+
+			$achievement_ids = $this->construct_array_of_ids( $result_ids );
+		}
+
+		$this->achievement_ids = $achievement_ids;
+	}
+
+	/**
+	 * Query for our attachment IDs based on having a parent that's an achievement post or post type.
+	 *
+	 * @since 1.0.0
+	 */
+	public function set_attachment_ids() {
+		global $wpdb;
+
+		$sql = "SELECT ID AS ID FROM {$wpdb->posts} WHERE post_type = %s AND post_parent = %d";
+		$attachment_ids = array();
+		foreach( $this->achievement_ids as $id ) {
+			$attachments_results_ids = $wpdb->get_results(
+				$wpdb->prepare(
+					$sql,
+					'attachment',
+					$id
+				)
+			);
+
+			$attachment_ids = $this->construct_array_of_ids( $attachments_results_ids );
+		}
+
+		$this->attachment_ids = $attachment_ids;
+	}
+
+	/**
+	 * Filter down our WPDB results to an indexed array.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $results Results from a $wpdb get_results call.
+	 *
+	 * @return array Indexed array of IDs for posts.
+	 */
+	public function construct_array_of_ids( $results = array() ) {
+		$ids = array();
+
+		if ( empty( $results ) ) {
+			return $ids;
+		}
+
+		foreach( $results as $result ) {
+			$ids[] = absint( $result->ID );
+		}
+
+		return $ids;
+	}
+
+	/**
 	 * Run SQL DELETE statement on the User Meta table.
 	 *
 	 * @since 1.0.0
