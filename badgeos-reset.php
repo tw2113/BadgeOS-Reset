@@ -79,7 +79,7 @@ class BadgeOS_Reset {
 		$this->set_attachment_ids();
 
 		$this->reset_achievement_meta();
-		$this->reset_achievement_types();
+		$this->reset_achievements_and_attachments();
 		$this->reset_users();
 		$this->reset_options();
 		$this->reset_p2p();
