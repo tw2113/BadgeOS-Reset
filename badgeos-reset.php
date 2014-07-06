@@ -175,7 +175,7 @@ class BadgeOS_Reset {
 	 *
 	 * @since 1.0.0
 	 */
-	private function reset_users() {
+	public function reset_users() {
 		global $wpdb;
 
 		//We have two types of keys stored for a user, so we need to handle both.
@@ -197,7 +197,7 @@ class BadgeOS_Reset {
 	 *
 	 * @since 1.0.0
 	 */
-	private function reset_achievement_meta() {
+	public function reset_achievement_meta() {
 		global $wpdb;
 
 		$sql = "DELETE FROM {$wpdb->postmeta} WHERE meta_key LIKE \"%s\"";
