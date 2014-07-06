@@ -74,6 +74,10 @@ class BadgeOS_Reset {
 			return;
 		}
 
+		$this->set_achievements();
+		$this->set_achievement_type_ids();
+		$this->set_attachment_ids();
+
 		$this->reset_achievement_meta();
 		$this->reset_achievement_types();
 		$this->reset_users();
