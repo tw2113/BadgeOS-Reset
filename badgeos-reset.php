@@ -94,6 +94,8 @@ class BadgeOS_Reset {
 		$achievement_types = badgeos_get_achievement_types_slugs();
 		$achievement_types[] = 'achievement-type';
 		$achievement_types[] = 'badgeos-log-entry';
+		$achievement_types[] = 'submission';
+		$achievement_types[] = 'nomination';
 
 		$this->achievement_types = $achievement_types;
 	}
