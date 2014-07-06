@@ -58,32 +58,9 @@ class BadgeOS_Reset {
 		load_plugin_textdomain( 'badgeos-reset', false, dirname( $this->basename ) . '/languages' );
 
 		add_action( 'admin_notices', array( $this, 'maybe_disable_plugin' ) );
-		add_action( 'badgeos_settings', array( $this, 'reset_settings' ) );
+		add_action( 'badgeos_settings', array( $this, 'settings_page' ) );
 		add_action( 'admin_init', array( $this, 'handle_reset' ) );
 
-	}
-
-	/**
-	 * Adds additional options to the BadgeOS Settings page
-	 *
-	 * @since 1.0.0
-	 */
-	public function reset_settings() {
-
-	?>
-		<tr>
-			<th scope="row">
-				<?php _e( 'Reset all BadgeOS data: ', 'badgeos-reset' ); ?>
-			</th>
-			<td>
-				<label for="badgeos_reset">
-					<input type="checkbox" name="badgeos_reset" id="badgeos_reset" value="1" />
-					<?php _e( 'WARNING: This will delete ALL your BadgeOS data*', 'badgeos-reset' ); ?>
-				</label>
-					<p><small><?php _e( '*As much as we can accurately detect', 'badgeos-reset' ); ?></small></p>
-			</td>
-		</tr>
-	<?php
 	}
 
 	/**
@@ -238,9 +215,33 @@ class BadgeOS_Reset {
 	}
 
 	/**
+	 * Adds additional options to the BadgeOS Settings page
+	 *
+	 * @since 1.0.0
+	 */
+	public function settings_page() {
+
+	?>
+		<tr>
+			<th scope="row">
+				<?php _e( 'Reset all BadgeOS data: ', 'badgeos-reset' ); ?>
+			</th>
+			<td>
+				<label for="badgeos_reset">
+					<input type="checkbox" name="badgeos_reset" id="badgeos_reset" value="1" />
+					<?php _e( 'WARNING: This will delete ALL your BadgeOS data*', 'badgeos-reset' ); ?>
+				</label>
+					<p><small><?php _e( '*As much as we can accurately detect', 'badgeos-reset' ); ?></small></p>
+			</td>
+		</tr>
+	<?php
+	}
+
+	/**
 	 * Check if BadgeOS is available
 	 *
 	 * @since  1.0.0
+	 *
 	 * @return bool True if BadgeOS is available, false otherwise
 	 */
 	public static function meets_requirements() {
