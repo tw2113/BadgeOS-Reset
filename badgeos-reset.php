@@ -34,6 +34,14 @@
  */
 class BadgeOS_Reset {
 
+	public $basename = '';
+	public $directory_path = '';
+	public $directory_uri = '';
+	public $achievement_types = array();
+	public $achievement_ids = array();
+	public $attachment_ids = array();
+
+
 	/**
 	 * Get everything running.
 	 *
