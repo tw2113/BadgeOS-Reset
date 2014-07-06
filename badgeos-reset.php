@@ -234,7 +234,7 @@ class BadgeOS_Reset {
 	 *
 	 * @since 1.0.0
 	 */
-	private function reset_options() {
+	public function reset_options() {
 		global $wpdb;
 
 		$sql = "DELETE FROM {$wpdb->options} WHERE option_name LIKE \"%s\"";
@@ -250,11 +250,10 @@ class BadgeOS_Reset {
 
 	/**
 	 * Run SQL TRUNCATE statement on our p2p tables.
-	 * Truncate drops the table and then rebuilds it as new
 	 *
 	 * @since 1.0.0
 	 */
-	private function reset_p2p() {
+	public function reset_p2p() {
 		return;
 
 		//@todo Determine how to best delete only BadgeOS content from these tables.
