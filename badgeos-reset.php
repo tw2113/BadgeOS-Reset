@@ -342,10 +342,13 @@ class BadgeOS_Reset {
 	 */
 	public static function meets_requirements() {
 
-		if ( class_exists('BadgeOS') )
+		if ( class_exists('BadgeOS') ) {
+
 			return true;
-		else
-			return false;
+
+		}
+
+		return false;
 
 	}
 
