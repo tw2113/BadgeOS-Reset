@@ -162,18 +162,49 @@ class BadgeOS_Reset {
 	 *
 	 * @return array Indexed array of IDs for posts.
 	 */
-	public function construct_array_of_ids( $results = array() ) {
-		$ids = array();
+	public function extract_achievement_ids( $results = array() ) {
 
-		if ( empty( $results ) ) {
-			return $ids;
+		if ( !empty( $results ) ) {
+
+			foreach( $results as $result ) {
+
+				if ( !empty( $result->ID ) ) {
+
+					$this->achievement_ids[] = $result->ID;
+
+				}
+
+			}
+
 		}
 
-		foreach( $results as $result ) {
-			$ids[] = absint( $result->ID );
+	}
+
+	/**
+	 * Add our achievement IDs to the appropriate property
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $results Results from a $wpdb get_results call.
+	 *
+	 * @return array Indexed array of IDs for posts.
+	 */
+	public function extract_attachment_ids( $results = array() ) {
+
+		if ( !empty( $results ) ) {
+
+			foreach( $results as $result ) {
+
+				if ( !empty( $result->ID ) ) {
+
+					$this->attachment_ids[] = $result->ID;
+
+				}
+
+			}
+
 		}
 
-		return $ids;
 	}
 
 	/**
