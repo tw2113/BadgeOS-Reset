@@ -113,7 +113,6 @@ class BadgeOS_Reset {
 		global $wpdb;
 
 		$sql = "SELECT ID AS ID FROM {$wpdb->posts} WHERE post_type = %s";
-		$achievement_ids = array();
 		foreach( $this->achievement_types as $type ) {
 
 			$result_ids = $wpdb->get_results(
@@ -123,10 +122,10 @@ class BadgeOS_Reset {
 				)
 			);
 
-			$achievement_ids = $this->construct_array_of_ids( $result_ids );
+			$this->extract_achievement_ids( $result_ids );
+
 		}
 
-		$this->achievement_ids = $achievement_ids;
 	}
 
 	/**
