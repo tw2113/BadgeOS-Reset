@@ -94,13 +94,13 @@ class BadgeOS_Reset {
 	 * @since 1.0.0
 	 */
 	public function set_achievements() {
-		$achievement_types = badgeos_get_achievement_types_slugs();
-		$achievement_types[] = 'achievement-type';
-		$achievement_types[] = 'badgeos-log-entry';
-		$achievement_types[] = 'submission';
-		$achievement_types[] = 'nomination';
 
-		$this->achievement_types = $achievement_types;
+		$this->achievement_types = badgeos_get_achievement_types_slugs();
+		$this->achievement_types[] = 'achievement-type';
+		$this->achievement_types[] = 'badgeos-log-entry';
+		$this->achievement_types[] = 'submission';
+		$this->achievement_types[] = 'nomination';
+
 	}
 
 	/**
