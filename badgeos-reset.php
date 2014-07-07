@@ -71,7 +71,9 @@ class BadgeOS_Reset {
 	public function handle_reset() {
 
 		if ( empty( $_POST ) || '1' !== $_POST['badgeos_reset'] ) {
+
 			return;
+
 		}
 
 		$this->set_achievements();
@@ -83,6 +85,7 @@ class BadgeOS_Reset {
 		$this->reset_users();
 		$this->reset_options();
 		$this->reset_p2p();
+
 	}
 
 	/**
@@ -106,11 +109,13 @@ class BadgeOS_Reset {
 	 * @since 1.0.0
 	 */
 	public function set_achievement_type_ids() {
+
 		global $wpdb;
 
 		$sql = "SELECT ID AS ID FROM {$wpdb->posts} WHERE post_type = %s";
 		$achievement_ids = array();
 		foreach( $this->achievement_types as $type ) {
+
 			$result_ids = $wpdb->get_results(
 				$wpdb->prepare(
 					$sql,
@@ -130,11 +135,13 @@ class BadgeOS_Reset {
 	 * @since 1.0.0
 	 */
 	public function set_attachment_ids() {
+
 		global $wpdb;
 
 		$sql = "SELECT ID AS ID FROM {$wpdb->posts} WHERE post_type = %s AND post_parent = %d";
 		$attachment_ids = array();
 		foreach( $this->achievement_ids as $id ) {
+
 			$attachments_results_ids = $wpdb->get_results(
 				$wpdb->prepare(
 					$sql,
@@ -178,6 +185,7 @@ class BadgeOS_Reset {
 	 * @since 1.0.0
 	 */
 	public function reset_users() {
+
 		global $wpdb;
 
 		//We have two types of keys stored for a user, so we need to handle both.
@@ -185,13 +193,16 @@ class BadgeOS_Reset {
 		$sql = "DELETE FROM {$wpdb->usermeta} WHERE meta_key LIKE \"%s\"";
 
 		foreach( $badgeos_keys as $key ) {
+
 			$wpdb->query(
 				$wpdb->prepare(
 					$sql,
 					$key . '%'
 				)
 			);
+
 		}
+
 	}
 
 	/**
@@ -223,12 +234,17 @@ class BadgeOS_Reset {
 	public function reset_achievements_and_attachments() {
 
 		foreach( $this->achievement_ids as $achievement ) {
+
 			wp_delete_post( $achievement );
+
 		}
 
 		foreach( $this->attachment_ids as $attachment ) {
+
 			wp_delete_attachment( $attachment );
+
 		}
+
 	}
 
 	/**
@@ -256,6 +272,7 @@ class BadgeOS_Reset {
 	 * @since 1.0.0
 	 */
 	public function reset_p2p() {
+
 		return;
 
 		//@todo Determine how to best delete only BadgeOS content from these tables.
@@ -268,9 +285,8 @@ class BadgeOS_Reset {
 	 *
 	 * @since 1.0.0
 	 */
-	public function settings_page() {
+	public function settings_page() { ?>
 
-	?>
 		<tr>
 			<th scope="row">
 				<?php _e( 'Reset all BadgeOS data: ', 'badgeos-reset' ); ?>
@@ -283,6 +299,7 @@ class BadgeOS_Reset {
 					<p><small><?php _e( '*As much as we can accurately detect', 'badgeos-reset' ); ?></small></p>
 			</td>
 		</tr>
+
 	<?php
 	}
 
@@ -313,6 +330,7 @@ class BadgeOS_Reset {
 	public function maybe_disable_plugin() {
 
 		if ( ! $this->meets_requirements() ) {
+
 			// Display our error
 			?>
 			<div id="message" class="error">
@@ -322,6 +340,7 @@ class BadgeOS_Reset {
 			<?php
 			// Deactivate our plugin
 			deactivate_plugins( $this->basename );
+
 		}
 
 	}
