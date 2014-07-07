@@ -239,9 +239,10 @@ class BadgeOS_Reset {
 	 * @since 1.0.0
 	 */
 	public function reset_achievement_meta() {
+
 		global $wpdb;
 
-		$sql = "DELETE FROM {$wpdb->postmeta} WHERE meta_key LIKE \"%s\"";
+		$sql = "DELETE FROM {$wpdb->postmeta} WHERE meta_key LIKE '%s'";
 
 		$wpdb->query(
 			$wpdb->prepare(
@@ -281,9 +282,10 @@ class BadgeOS_Reset {
 	 * @since 1.0.0
 	 */
 	public function reset_options() {
+
 		global $wpdb;
 
-		$sql = "DELETE FROM {$wpdb->options} WHERE option_name LIKE \"%s\"";
+		$sql = "DELETE FROM {$wpdb->options} WHERE option_name LIKE '%s'";
 
 		$wpdb->query(
 			$wpdb->prepare(
