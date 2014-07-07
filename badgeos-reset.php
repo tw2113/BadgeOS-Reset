@@ -138,7 +138,6 @@ class BadgeOS_Reset {
 		global $wpdb;
 
 		$sql = "SELECT ID AS ID FROM {$wpdb->posts} WHERE post_type = %s AND post_parent = %d";
-		$attachment_ids = array();
 		foreach( $this->achievement_ids as $id ) {
 
 			$attachments_results_ids = $wpdb->get_results(
@@ -149,10 +148,9 @@ class BadgeOS_Reset {
 				)
 			);
 
-			$attachment_ids = $this->construct_array_of_ids( $attachments_results_ids );
-		}
+			$this->extract_attachment_ids( $attachments_results_ids );
 
-		$this->attachment_ids = $attachment_ids;
+		}
 	}
 
 	/**
