@@ -154,7 +154,7 @@ class BadgeOS_Reset {
 	}
 
 	/**
-	 * Filter down our WPDB results to an indexed array.
+	 * Add our achievement IDs to the appropriate property
 	 *
 	 * @since 1.0.0
 	 *
