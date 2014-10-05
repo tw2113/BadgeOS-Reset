@@ -84,7 +84,7 @@ class BadgeOS_Reset {
 		$this->reset_achievements_and_attachments();
 		$this->reset_users();
 		$this->reset_options();
-		$this->reset_p2p();
+		#$this->reset_p2p();
 
 	}
 
