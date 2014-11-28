@@ -3,7 +3,7 @@
  * Plugin Name: BadgeOS Reset Developer Add-On
  * Plugin URI: http://michaelbox.net
  * Description: This BadgeOS add-on adds support to reset BadgeOS data for developer purpose
- * Author: Michae; Beckwith
+ * Author: Michael Beckwith
  * Version: 1.0.0
  * Author URI: http://michaelbox.net
  * License: GNU AGPLv3
